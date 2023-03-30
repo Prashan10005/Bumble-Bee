@@ -4,10 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>PRODUCT MANAGEMENT</title>
+<jsp:include page="adminHeader.jsp" />
 </head>
 <body>
-<h1>MINIMUM AGE SHOULD BE 18</h1>
-<p> Click Here to go for <a href="register.jsp"> Registration</a> Page.</p>
+manage product
 </body>
+<footer>
+<jsp:include page="footer.jsp" />
+</footer>
 </html>

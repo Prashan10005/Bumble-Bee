@@ -52,7 +52,10 @@ public class dbManager {
 	
 	private static final String INSERTUSER = "INSERT INTO user(fName,lName,nic,age,address,email,mobile,password) VALUES(?, ?, ?,?,?,?,?,?)";
 	private static final String INSERTADMIN = "INSERT INTO admin(fName,lName,nic,email,mobile,password) VALUES(?,?, ?, ?,?,?)";
-
+	private static final String SELECTUSERBYNIC = "SELECT nic, fName, lName,email,mobile from user where nic =?";
+	private static final String SELECTALLUSERS = "SELECT * from user ";
+	private static final String DELETEUSER = "DELETE from user where nic =?";
+	private static final String UPDATEUSER = "UPDATE user set fName=?,lName=?,email=?,mobile? where nic=?";
 	
 	public int insertUser(user user) {
 		Connection conn = null;
@@ -109,41 +112,40 @@ public class dbManager {
 
 	}
 	
-	public boolean checkUserNic(String nic) {
+	public boolean checkUser(user user) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-
+		boolean status = false;
 		try {
-		conn = getConnection();
-		PreparedStatement query = conn.prepareStatement("SELECT * FROM `user` WHERE NIC ='"+nic+"'");
-		boolean row = query.execute();
-        return true;
+			conn = getConnection();
+			stmt = conn.prepareStatement("SELECT * FROM user WHERE nic = ?");
+			stmt.setString(1,user.getNic());
+			System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            status = rs.next();
 		} catch (SQLException e) {
-		// e.printStackTrace();
-		throw new RuntimeException(e);
-		} finally {
-		close(stmt);
-		close(conn);
-		}
-		
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return status;
 	}
 	
-	public boolean checkAdminNic(String nic) {
+	public boolean checkAdmin(admin admin) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-
+		boolean status = false;
 		try {
-		conn = getConnection();
-		PreparedStatement query = conn.prepareStatement("SELECT * FROM `admin` WHERE NIC ='"+nic+"'");
-		boolean row = query.execute();
-        return true;
+			conn = getConnection();
+			stmt = conn.prepareStatement("SELECT * FROM admin WHERE nic = ? ");
+			stmt.setString(1,admin.getNic());
+			System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            status = rs.next();
 		} catch (SQLException e) {
-		// e.printStackTrace();
-		throw new RuntimeException(e);
-		} finally {
-		close(stmt);
-		close(conn);
-		}
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return status;
 	}
 	
 	public boolean adminLogin(admin admin) {
@@ -183,4 +185,134 @@ public class dbManager {
         }
         return status;
 	}
+	
+	public boolean updateUser(user user)  {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		boolean status = false;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement("UPDATE user SET password = ? WHERE nic = ?");
+			stmt.setString(1,user.getPassword());
+			stmt.setString(2,user.getNic());
+			boolean rowUpdated = stmt.executeUpdate() > 0;
+	        close(stmt);
+	        close(conn);
+	       
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return status;
+}
+	public boolean updateAdmin(admin admin)  {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		boolean status = false;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement("UPDATE admin SET password = ? WHERE nic = ?");
+			stmt.setString(1,admin.getPassword());
+			stmt.setString(2,admin.getNic());
+			boolean rowUpdated = stmt.executeUpdate() > 0;
+	        close(stmt);
+	        close(conn);
+	       
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return status;
+}
+	
+	public boolean manageUser(user user)  {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		boolean status = false;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(UPDATEUSER, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,user.getfName());
+			stmt.setString(2,user.getlName());
+			stmt.setString(3,user.getEmail());
+			stmt.setInt(4,user.getMobile());
+			stmt.setString(5,user.getNic());
+			boolean rowUpdated = stmt.executeUpdate() > 0;
+	        close(stmt);
+	        close(conn);
+	       
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return status;
+}	
+	public user selectUser(String nic) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		user user = null;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(SELECTUSERBYNIC, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,nic);
+			System.out.println(stmt);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				String fName = rs.getString("fName");
+				String lName = rs.getString("lName");
+				String email = rs.getString("email");
+				int mobile = rs.getInt("mobile");
+				user = new user(fName,lName,nic,email,mobile);
+			}
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+	}
+		return user;
+}
+	
+	public List<user> selectAllUser() {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		List<user> users = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(SELECTALLUSERS, Statement.RETURN_GENERATED_KEYS);
+			System.out.println(stmt);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				String fName = rs.getString("fName");
+				String lName = rs.getString("lName");
+				String nic = rs.getString("nic");
+				String email = rs.getString("email");
+				int mobile = rs.getInt("mobile");
+				users.add(new user(fName,lName,nic,email,mobile));
+			}
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+	}
+		return users;
+}
+	
+	public boolean deleteUser(String nic)  {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		boolean rowDeleted;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(DELETEUSER, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,nic);
+			rowDeleted = stmt.executeUpdate() > 0;
+	        close(stmt);
+	        close(conn);
+	       
+		} catch (SQLException e) {
+            // process sql exception
+			throw new RuntimeException(e);
+        }
+        return rowDeleted;
+}
 }

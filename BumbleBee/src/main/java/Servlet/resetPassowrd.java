@@ -7,26 +7,26 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import Dao.dbManager;
-import ModelBean.user;
 
+import Dao.dbManager;
+import ModelBean.admin;
+import ModelBean.user;
 /**
- * Servlet implementation class regisUser
+ * Servlet implementation class resetPassowrd
  */
-public class regisUser extends HttpServlet {
+public class resetPassowrd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private dbManager dbManager;
     
     public void init() {
     	dbManager = new dbManager();
     }
-    
-    
+      
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public regisUser() {
+    public resetPassowrd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,34 +35,28 @@ public class regisUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fName = request.getParameter("fName");
-        String lName = request.getParameter("lName");
-        String nic = request.getParameter("nic");
-        int age = Integer.parseInt(request.getParameter("age"));
-        String address = request.getParameter("address");
-        String email = request.getParameter("email");
-        int mobile = Integer.parseInt(request.getParameter("mobile"));
+		String nic = request.getParameter("nic");
         String password = request.getParameter("password");
         
-       
-        if(age < 18) {
-        	RequestDispatcher req = request.getRequestDispatcher("minorRegis.jsp");
+        user userBean = new user();
+        userBean.setNic(nic);
+        userBean.setPassword(password);
+        admin adminBean = new admin();
+        adminBean.setNic(nic);
+        adminBean.setPassword(password);
+        
+        if(dbManager.checkUser(userBean)) {
+    	    dbManager.updateUser(userBean);
+    	    RequestDispatcher req = request.getRequestDispatcher("passChangeSuccess.jsp");
+    		req.forward(request, response);
+        }else if(dbManager.checkAdmin(adminBean)){
+        	dbManager.updateAdmin(adminBean);
+    	    RequestDispatcher req = request.getRequestDispatcher("passChangeSuccess.jsp");
     		req.forward(request, response);
         }else {
-        	user userBean = new user();
-            userBean.setNic(nic); 
-        	if(dbManager.checkUser(userBean)){
-        		RequestDispatcher req = request.getRequestDispatcher("alreadyRegis.jsp");
-        		req.forward(request, response);
-        	}else {
-        		user newuser1 = new user(fName,lName,nic,age,address,email,mobile,password);
-        	    dbManager.insertUser(newuser1);
-        	    RequestDispatcher req = request.getRequestDispatcher("regisSuccess.jsp");
-        		req.forward(request, response);
-        	}
+        	RequestDispatcher req = request.getRequestDispatcher("unRegisNic.jsp");
+    		req.forward(request, response);
         }
-        
-             
 	}
 	
 

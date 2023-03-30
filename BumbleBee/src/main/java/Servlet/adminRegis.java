@@ -42,14 +42,15 @@ public class adminRegis extends HttpServlet {
         String password = request.getParameter("password");
         
         
-        boolean search = dbManager.checkAdminNic(nic); 
-    	if(search){
+        admin adminBean = new admin();
+        adminBean.setNic(nic);
+    	if(dbManager.checkAdmin(adminBean)){
     		RequestDispatcher req = request.getRequestDispatcher("alreadyRegis.jsp");
     		req.forward(request, response);
     	}else {
     		admin newAdmin = new admin(fName,lName,nic,email,mobile,password);
             dbManager.insertAdmin(newAdmin);
-            RequestDispatcher req = request.getRequestDispatcher("adminRegis.jsp");
+            RequestDispatcher req = request.getRequestDispatcher("regisSuccess.jsp");
     		req.forward(request, response);
     	}
         

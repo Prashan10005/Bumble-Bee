@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>LOGIN PAGE</title>
+<title>Change Password</title>
 </head>
 <body style="background-image:url(login.jpg); ">
-<form name="form" action="login" method="post">
+<form name="form" action="resetPassowrd" method="post">
 	<div align="center">
 		<div style="padding:8%;">
 			<div style="text-align:center; width:500px; height:400px;  border: 2px solid black; ">
-			<h1> LOGIN TO BUMBLEBEE</h1>
+			<h1> PASSWORD RESET </h1>
 					
 					<br>
 					<br>
@@ -23,11 +23,10 @@
 					<br>
 					<br>
 					<br>					
-					<input style="height:25px; width:100px"type="submit" value = "Sign In">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input style="height:25px; width:100px" type="reset" value = "Reset" >
+					<input style="height:25px; width:150px"type="submit" value = "Change Password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input style="height:25px; width:100px" type="reset" value = "Reset" >
 					<br>
 					<br>
-					<p>  <a href="forgotPassword.jsp"> Forgot Password</a>.</p>
-					<p>  <a href="register.jsp"> Create an Account</a>.</p>
+					<p>  <a href="Login.jsp"> To Sign In</a>.</p>
 					
 			</div>
 		</div>

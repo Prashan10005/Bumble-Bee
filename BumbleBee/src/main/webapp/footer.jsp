@@ -5,9 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<h1>MINIMUM AGE SHOULD BE 18</h1>
-<p> Click Here to go for <a href="register.jsp"> Registration</a> Page.</p>
+<footer class="footer">
+ <p>Bumble Bee Buy Now Pay Later</p>
+ <p>Contact No - 011 2315679 </p>
+</footer>
 </body>
 </html>

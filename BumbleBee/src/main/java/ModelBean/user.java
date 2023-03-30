@@ -83,6 +83,15 @@ public class user {
 	public user() {
 		super();
 	}
+	public user(String fName, String lName, String nic, String email, int mobile) {
+		super();
+		this.fName = fName;
+		this.lName = lName;
+		this.nic = nic;
+		this.email = email;
+		this.mobile = mobile;
+	}
+	
 	
 	
 }

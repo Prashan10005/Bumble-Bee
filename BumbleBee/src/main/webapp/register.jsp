@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>USER REGISTRATION PAGE</title>
 </head>
+
 <script>
 function validateemail()  
 {  
@@ -18,6 +19,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   }  
 }  
 </script>
+
 <body style="background-image:url(login.jpg); ">
 	<div align="center">
 	<div style="padding:4%">

@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>MINIMUM AGE SHOULD BE 18</h1>
-<p> Click Here to go for <a href="register.jsp"> Registration</a> Page.</p>
+<h1>NIC is not Registered</h1>
+<p> Click Here to <a href="register.jsp"> Register as User</a> .</p>
+<p> Click Here to <a href="adminRegis.jsp"> Register as Admin</a> .</p>
 </body>
 </html>

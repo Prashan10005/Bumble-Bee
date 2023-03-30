@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>MINIMUM AGE SHOULD BE 18</h1>
-<p> Click Here to go for <a href="register.jsp"> Registration</a> Page.</p>
+	<center>
+	<h1>Error</h1>
+	<h2> <%=exception.getMessage() %><br/></h2>
+	</center>
 </body>
 </html>
