@@ -11,9 +11,9 @@
 <div class="header">
   <a href="#default" class="logo">BUMBLE BEE</a>
   <div class="header-right">
-    <a  href="adminHome.jsp">Manage User</a>
-    <a  href="approveUser.jsp">Manage loan</a>
-    <a  href="manageProduct.jsp">Manage Product</a>
+    <a  href="buyProducts.jsp">Buy Products</a>
+    <a  href="manageOrders.jsp">Order Management</a>
+    <a  href="userProfile.jsp">View Profile</a>
     <a  href="logOut">Logout</a>
   </div>
 </div>

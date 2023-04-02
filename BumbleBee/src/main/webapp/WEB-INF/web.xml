@@ -90,7 +90,57 @@
     <url-pattern>/displayUser</url-pattern>
   </servlet-mapping>
   <error-page>
-  	<exception-type>java.lang.Exception</exception-type>
-  	<location>/error.jsp</location>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error.jsp</location>
   </error-page>
+  <servlet>
+    <description></description>
+    <display-name>manageLoan</display-name>
+    <servlet-name>manageLoan</servlet-name>
+    <servlet-class>Servlet.manageLoan</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manageLoan</servlet-name>
+    <url-pattern>/manageLoan</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>manageProduct</display-name>
+    <servlet-name>manageProduct</servlet-name>
+    <servlet-class>Servlet.manageProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manageProduct</servlet-name>
+    <url-pattern>/manageProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>logOut</display-name>
+    <servlet-name>logOut</servlet-name>
+    <servlet-class>Servlet.logOut</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logOut</servlet-name>
+    <url-pattern>/logOut</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cart</display-name>
+    <servlet-name>cart</servlet-name>
+    <servlet-class>Servlet.cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>moveToCart</display-name>
+    <servlet-name>moveToCart</servlet-name>
+    <servlet-class>Servlet.moveToCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>moveToCart</servlet-name>
+    <url-pattern>/moveToCart</url-pattern>
+  </servlet-mapping>
 </web-app>

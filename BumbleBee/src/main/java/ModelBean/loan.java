@@ -8,8 +8,6 @@ public class loan {
 	public Double usedAmount;
 	public Double balance;
 	public int installment;
-	public Date nextDueDate;
-	public Double nextPayment;
 	public String getCusNIC() {
 		return cusNIC;
 	}
@@ -40,30 +38,15 @@ public class loan {
 	public void setInstallment(int installment) {
 		this.installment = installment;
 	}
-	public Date getNextDueDate() {
-		return nextDueDate;
-	}
-	public void setNextDueDate(Date nextDueDate) {
-		this.nextDueDate = nextDueDate;
-	}
-	public Double getNextPayment() {
-		return nextPayment;
-	}
-	public void setNextPayment(Double nextPayment) {
-		this.nextPayment = nextPayment;
-	}
-	public loan(String cusNIC, Double loanAmount, Double usedAmount, Double balance, int installment, Date nextDueDate,
-			Double nextPayment) {
+	public loan(String cusNIC, Double loanAmount, Double usedAmount, Double balance, int installment) {
 		super();
 		this.cusNIC = cusNIC;
 		this.loanAmount = loanAmount;
 		this.usedAmount = usedAmount;
 		this.balance = balance;
 		this.installment = installment;
-		this.nextDueDate = nextDueDate;
-		this.nextPayment = nextPayment;
 	}
-	
+
 	
 	
 }

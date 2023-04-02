@@ -42,10 +42,12 @@ public class login extends HttpServlet {
         userBean.setNic(nic);
         userBean.setPassword(password);
         if (dbManager.adminLogin(adminBean)) {
+        	request.getSession().setAttribute("auth", adminBean);
         	RequestDispatcher req = request.getRequestDispatcher("adminHome.jsp");
 			req.include(request, response);
         } else if (dbManager.userLogin(userBean)) {
-        	RequestDispatcher req = request.getRequestDispatcher("userHome.jsp");
+        	request.getSession().setAttribute("auth", userBean);
+        	RequestDispatcher req = request.getRequestDispatcher("userProfile.jsp");
 			req.include(request, response);
         } else {
         	RequestDispatcher req = request.getRequestDispatcher("invalidLogin.jsp");

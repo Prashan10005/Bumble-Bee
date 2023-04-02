@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-         <%@page import="Dao.dbManager" %>
- <%@page import="ModelBean.admin" %>
+ <%@page import="Dao.dbManager" %>
+ <%@page import="ModelBean.user" %>
  <%
- admin  auth =(admin)request.getSession().getAttribute("auth");
+ user  auth =(user)request.getSession().getAttribute("auth");
  if(auth != null){
 	 request.setAttribute("auth",auth);
  }
@@ -12,11 +12,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>PRODUCT MANAGEMENT</title>
-<jsp:include page="adminHeader.jsp" />
+<title>USER HOME PAGE</title>
+<jsp:include page="userHeader.jsp" /> 
 </head>
 <body>
-manage product
+	
 </body>
 <footer>
 <jsp:include page="footer.jsp" />
