@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@page import="Dao.dbManager" %>
+ <%@page import="ModelBean.admin" %>
+ <%
+ admin  auth =(admin)request.getSession().getAttribute("auth");
+ if(auth != null){
+	 request.setAttribute("auth",auth);
+ }
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +18,7 @@
 <body>
 
     <div align="center">
-    	<h1>User Management</h1>
+    	<h1>User Management</h1> 
    		<p>List of Users</p>
         <table border="1" cellpadding="5">
             
