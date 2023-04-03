@@ -143,4 +143,34 @@
     <servlet-name>moveToCart</servlet-name>
     <url-pattern>/moveToCart</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cartRemove</display-name>
+    <servlet-name>cartRemove</servlet-name>
+    <servlet-class>Servlet.cartRemove</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cartRemove</servlet-name>
+    <url-pattern>/cartRemove</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>checkout</display-name>
+    <servlet-name>checkout</servlet-name>
+    <servlet-class>Servlet.checkout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkout</servlet-name>
+    <url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>acceptUser</display-name>
+    <servlet-name>acceptUser</servlet-name>
+    <servlet-class>Servlet.acceptUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>acceptUser</servlet-name>
+    <url-pattern>/acceptUser</url-pattern>
+  </servlet-mapping>
 </web-app>

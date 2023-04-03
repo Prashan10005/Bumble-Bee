@@ -1,55 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-     <%@page import="Dao.dbManager" %>
- <%@page import="ModelBean.admin" %>
- <%
- admin  auth =(admin)request.getSession().getAttribute("auth");
- if(auth != null){
-	 request.setAttribute("auth",auth);
- }
- %>
+	pageEncoding="ISO-8859-1"%>
+<%@page import="Dao.dbManager"%>
+<%@page import="ModelBean.*"%>
+<%@page import="java.util.*" %>
+<%@page import="java.util.List" %>
+<%
+admin auth = (admin) request.getSession().getAttribute("auth");
+if (auth != null) {
+	request.setAttribute("auth", auth);
+}
+ArrayList<user> user_list = (ArrayList<user>) session.getAttribute("user-list");
+List<user> userlist = null;
+	dbManager proDao = new  dbManager();
+	userlist = proDao.selectAllUser();
+	request.setAttribute("user_list",user_list);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>USER MANAGEMENT</title>
-<jsp:include page="adminHeader.jsp" /> 
+<jsp:include page="adminHeader.jsp" />
 </head>
 <body>
+	<div class="container">
+		<div class="card-header my-3">All Users</div>
+		<table class="table table-loght">
+			<thead>
+				<tr>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">NIC</th>
+					<th scope="col">Age</th>
+					<th scope="col">Email</th>
+					<th scope="col">Mobile</th>
+					<th scope="col">Approve</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for (user c :userlist) {
+				%>
+				<tr>
+					<td><%=c.getfName()%></td>
+					<td><%=c.getlName()%></td>
+					<td><%=c.getNic()%></td>
+					<td><%=c.getAge()%></td>
+					<td><%=c.getEmail()%></td>
+					<td><%=c.getMobile()%></td>
+					<td><a class="btn btn-sm "
+						href="acceptUser?nic=<%= c.getNic() %>">Accept User</a></td>
+				</tr>
+				<%
+				}
+				
+				%>
 
-    <div align="center">
-    	<h1>User Management</h1> 
-   		<p>List of Users</p>
-        <table border="1" cellpadding="5">
-            
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>NIC</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Actions</th>
-            </tr>
-            <c:forEach var="user" items="${listUser}">
-                <tr>
-                    <td><c:out value="${user.fName}" /></td>
-                    <td><c:out value="${user.lName}" /></td>
-                    <td><c:out value="${user.nic}" /></td>
-                    <td><c:out value="${user.email}" /></td>`
-                    <td><c:out value="${user.mobile}" /></td>
-                    <td>
-                        <a href="/edit?nic=<c:out value='${user.nic}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/delete?nic<c:out value='${user.nic}' />">Delete</a>                     
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <p></p>
-    </div>  
-    </form> 
+
+			</tbody>
+		</table>
+	</div>
 </body>
 <footer>
-<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.jsp" />
 </footer>
 </html>

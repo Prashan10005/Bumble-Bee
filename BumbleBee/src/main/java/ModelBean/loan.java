@@ -46,6 +46,9 @@ public class loan {
 		this.balance = balance;
 		this.installment = installment;
 	}
+	public loan() {
+		super();
+	}
 
 	
 	

@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.text.DecimalFormat" %>	
 <%@page import="Dao.dbManager"%>
 <%@page import="ModelBean.user"%>
+<%@page import="ModelBean.product"%>
+<%@page import="ModelBean.cart"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
 <%
+DecimalFormat dcf = new DecimalFormat("#.##");
+request.setAttribute("dcf",dcf);
 user auth = (user) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
+}
+
+ArrayList<cart> cart_list = (ArrayList<cart>) session.getAttribute("cart-list");
+List<cart> cartProduct = null;
+if(cart_list != null){
+	dbManager proDao = new  dbManager();
+	cartProduct = proDao.displayCart(cart_list);
+	double total = proDao.getTotal(cart_list);
+	request.setAttribute("cart_list",cart_list);
+	request.setAttribute("total",total);
 }
 %>
 
@@ -19,8 +36,8 @@ if (auth != null) {
 <body>
 	<div class="container">
 		<div class="d-flex py-3">
-			<h3>Total Price : Rs 452</h3>
-			<a class="mx-3 btn btn-primary" href="#">Check Out</a>
+			<h3>Total Price : Rs ${(total>0)?dcf.format(total):0}</h3>		
+			<a class="mx-3 btn btn-primary" href="checkout">Check Out</a>
 		</div>
 		<table class="table table-loght">
 			<thead>
@@ -32,14 +49,21 @@ if (auth != null) {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Head Phone</td>
-					<td>Mobile Accessories</td>
-					<td>Rs 6750</td>
-					<td>
-					<a class="btn btn-sm btn-danger" href="">Remove</a>
-					</td>
-				</tr>
+			<% if(cart_list != null){
+					for(cart c:cartProduct){ %>
+						<tr>
+						<td><%= c.getProName() %></td>
+						<td><%= c.getCategory() %></td>
+						<td>Rs <%= dcf.format(c.getPrice()) %></td>
+						<td>
+						<a class="btn btn-sm btn-danger" href="cartRemove?proID=<%= c.getProID()%>">Remove</a>
+						</td>
+					</tr>	
+				<%}
+				}
+				%>
+			
+				
 			</tbody>
 		</table>
 	</div>

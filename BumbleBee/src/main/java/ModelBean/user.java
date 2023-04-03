@@ -91,6 +91,15 @@ public class user {
 		this.email = email;
 		this.mobile = mobile;
 	}
+	public user(String fName, String lName, String nic, int age, String email, int mobile) {
+		super();
+		this.fName = fName;
+		this.lName = lName;
+		this.nic = nic;
+		this.age = age;
+		this.email = email;
+		this.mobile = mobile;
+	}
 	
 	
 	

@@ -3,14 +3,22 @@
 <%@page import="Dao.dbManager"%>
 <%@page import="ModelBean.user"%>
 <%@page import="java.util.List" %>
+<%@page import="java.util.ArrayList" %>
 <%@page import="ModelBean.product"%>
+<%@page import="ModelBean.cart"%>
 <%
 user auth = (user) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
 }
-dbManager proDao = new  dbManager();
-List<product> product = proDao.getAllProduct();
+dbManager proDao1 = new  dbManager();
+List<product> product = proDao1.getAllProduct();
+
+ArrayList<cart> cart_list = (ArrayList<cart>) session.getAttribute("cart-list");
+List<cart> cartProduct = null;
+if(cart_list != null){
+	request.setAttribute("cart_list",cart_list);
+}
 %>
 <!DOCTYPE html>
 <html>

@@ -12,7 +12,7 @@
   <a href="#default" class="logo">BUMBLE BEE</a>
   <div class="header-right">
     <a  href="buyProducts.jsp">Buy Products</a>
-    <a  href="manageOrders.jsp">Order Management</a>
+    <a  href="manageOrders.jsp">Order Management&nbsp;<span class="badge badge-danger px-1">${cart_list.size()}</span></a>
     <a  href="userProfile.jsp">View Profile</a>
     <a  href="logOut">Logout</a>
   </div>

@@ -6,6 +6,7 @@ public class product {
 	public String category;
 	public Double price;
 	public String image;
+	
 	public int getProID() {
 		return proID;
 	}
@@ -46,6 +47,13 @@ public class product {
 	}
 	public product() {
 		super();
+	}
+	public product(String proName, String category, Double price, String image) {
+		super();
+		this.proName = proName;
+		this.category = category;
+		this.price = price;
+		this.image = image;
 	}
 	
 	
