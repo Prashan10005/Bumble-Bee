@@ -12,11 +12,7 @@ if (auth != null) {
 	request.setAttribute("auth", auth);
 }
 
-ArrayList<cart> cart_list = (ArrayList<cart>) session.getAttribute("cart-list");
-List<cart> cartProduct = null;
-if (cart_list != null) {
-	request.setAttribute("cart_list", cart_list);
-}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +31,7 @@ if (cart_list != null) {
 				<div class="form-group row">
 					<label for="staticEmail" class="col-sm-3 col-form-label">First Name</label>
 					<div class="col-sm-9">
-						<input type="text"  class="form-control"
+						<input type="text"  class="form-control-plaintext"
 							id="fName" name="fName">
 					</div>
 				</div>

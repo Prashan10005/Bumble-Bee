@@ -55,7 +55,6 @@ public class dbManager {
 
 	private static final String INSERTUSER = "INSERT INTO user(fName,lName,nic,age,address,email,mobile,password) VALUES(?, ?, ?,?,?,?,?,?)";
 	private static final String INSERTADMIN = "INSERT INTO admin(fName,lName,nic,email,mobile,password) VALUES(?,?, ?, ?,?,?)";
-	private static final String SELECTALLUSERS = "SELECT * from user ";
 	private static final String INSERTORDER = "INSERT INTO order(uID,proID,quantity,date) VALUES( ?, ?,?,?)";
 	
 
@@ -234,7 +233,7 @@ public class dbManager {
 		List<user> users = new ArrayList<user>();
 		try {
 			conn = getConnection();
-			stmt = conn.prepareStatement(SELECTALLUSERS, Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement( "SELECT * from user ", Statement.RETURN_GENERATED_KEYS);
 			System.out.println(stmt);
 			ResultSet rs = stmt.executeQuery();
 
